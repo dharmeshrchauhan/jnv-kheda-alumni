@@ -27,9 +27,11 @@ input[type=text],input[type=Email], select, textarea{
   
   /* Style the container */
   .container {
+    max-width: 600px;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
+    margin: auto;
   }
   
   /* Floating column for labels: 25% width */
