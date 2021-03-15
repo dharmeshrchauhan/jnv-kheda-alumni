@@ -7,10 +7,59 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/form.css">
     <title>Document</title>
+    <script type="text/javascript">
+    	function onAdmissionClassChange(){
+    		console.log(1);
+    		var admclassvalue = document.getElementById('admclass').value;
+    		var passoutclass = document.getElementById('passoutclass');
+    		var passoutclassvalue = passoutclass.value;
+    		if (parseInt(passoutclass.value) < parseInt(admclassvalue)) {
+    			passoutclass.value = "-1";
+    		}
+    		for (var i = 0; i < passoutclass.options.length; i++) {
+    			console.log(i);
+    			if (parseInt(passoutclass.options[i].value) < parseInt(admclassvalue)) {
+    				passoutclass.options[i].disabled = true;
+    			}
+    			else {
+    				passoutclass.options[i].disabled = false;
+    			}
+    		 }
+    		 updatePassoutClass();
+    	}
+    	function updatePassoutClass() {
+    		var admclassvalue = document.getElementById('admclass').value;
+    		var admyearvalue = document.getElementById('admyear').value;
+    		var passoutclassvalue = document.getElementById('passoutclass').value;
+    		if (admclassvalue != "-1" && admyearvalue != "-1" && passoutclassvalue != "-1") {
+    			document.getElementById('passoutyear').value = parseInt(passoutclassvalue) - parseInt(admclassvalue) + 1 + parseInt(admyearvalue);
+    		}
+    	}
+    	function onProfTypeChange(element) {
+    		console.log(element.value);
+    		if (element.value == "student") {
+    			document.getElementById('quallabel').innerHTML = "Course";
+    			document.getElementById('prof1row').style.display = "none";
+    			document.getElementById('prof2row').style.display = "none";
+    			document.getElementById('prof3row').style.display = "none";
+    			document.getElementById('study1row').style.display = "block";
+    			document.getElementById('study2row').style.display = "block";
+    		}
+    		else {
+    			document.getElementById('quallabel').innerHTML = "Study/Qualification";
+    			document.getElementById('prof1row').style.display = "block";
+    			document.getElementById('prof2row').style.display = "block";
+    			document.getElementById('prof3row').style.display = "block";
+    			document.getElementById('study1row').style.display = "block";
+    			document.getElementById('study2row').style.display = "block";
+    		}
+    		
+    	}
+    </script>
 </head>
 
 <body>
-    <div style="max-width:800:text-align:center">
+    <div>
         <div class="container">
             <h1 style="text-align:center">JNV Kheda Alumni</h1>
             <form action="action_page.php">
@@ -19,16 +68,16 @@
                         <label for="fname">Full Name</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                        <input type="text" id="fname" name="firstname" placeholder="Your name.." autofocus >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Admission Year</label>
+                        <label for="lname">Admission Class/Year</label>
                     </div>
                     <div class="col-75">
-                        <select id="admclass" name="admclass">
-                            <option value="-1">--Select Class--</option>
+                        <select id="admclass" name="admclass" style="width:100px" onchange="onAdmissionClassChange()">
+                            <option value="-1" disabled selected>--</option>
                             <option value="6">VI</option>
                             <option value="7">VII</option>
                             <option value="8">VIII</option>
@@ -37,20 +86,23 @@
                             <option value="11">XI</option>
                             <option value="12">XII</option>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Admission Year</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="admyear" name="admyear">
-                            <option value="-1">--Select Year--</option>
+                        &nbsp;&nbsp;/&nbsp;&nbsp;
+                        <select id="admyear" name="admyear" style="width:100px" onchange="updatePassoutClass()">
+                            <option value="-1" disabled selected>--</option>
                             <option value="1986">1986</option>
                             <option value="1987">1987</option>
                             <option value="1988">1988</option>
                             <option value="1989">1989</option>
                             <option value="1990">1990</option>
+                            <option value="1991">1991</option>
+                            <option value="1992">1992</option>
+                            <option value="1993">1993</option>
+                            <option value="1994">1994</option>
+                            <option value="1995">1995</option>
+                            <option value="1996">1996</option>
+                            <option value="1997">1997</option>
+                            <option value="1998">1998</option>
+                            <option value="1999">1999</option>
                             <option value="2000">2000</option>
                             <option value="2001">2001</option>
                             <option value="2002">2002</option>
@@ -77,11 +129,11 @@
                 </div>
                 <div class="row">
                     <div class="col-25">
-                        <label for="lname">Passout Class</label>
+                        <label for="lname">Passout Class/Year</label>
                     </div>
                     <div class="col-75">
-                        <select id="passoutclass" name="passoutclass">
-                            <option value="-1">--Select Class--</option>
+                        <select id="passoutclass" name="passoutclass" style="width:100px" onchange="updatePassoutClass()">
+                            <option value="-1" disabled selected>--</option>
                             <option value="6">VI</option>
                             <option value="7">VII</option>
                             <option value="8">VIII</option>
@@ -90,20 +142,23 @@
                             <option value="11">XI</option>
                             <option value="12">XII</option>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Passout Year</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="passoutyear" name="passoutyear">
-                            <option value="-1">--Select Year--</option>
+                        &nbsp;&nbsp;/&nbsp;&nbsp;
+						<select id="passoutyear" name="passoutyear" disabled style="width:100px" onchange="updatePassoutClass()">
+                            <option value="-1" disabled selected>--</option>
                             <option value="1986">1986</option>
                             <option value="1987">1987</option>
                             <option value="1988">1988</option>
                             <option value="1989">1989</option>
                             <option value="1990">1990</option>
+                            <option value="1991">1991</option>
+                            <option value="1992">1992</option>
+                            <option value="1993">1993</option>
+                            <option value="1994">1994</option>
+                            <option value="1995">1995</option>
+                            <option value="1996">1996</option>
+                            <option value="1997">1997</option>
+                            <option value="1998">1998</option>
+                            <option value="1999">1999</option>
                             <option value="2000">2000</option>
                             <option value="2001">2001</option>
                             <option value="2002">2002</option>
@@ -125,15 +180,14 @@
                             <option value="2018">2018</option>
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
                         </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="lname">Email</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="email" id="lname" name="lastname" placeholder="Email">
                     </div>
                 </div>
                 <div class="row">
@@ -149,19 +203,19 @@
                         <label for="country">Are you doing government service / or working in private sector?</label>
                     </div>
                     <div class="col-75">
-                        <select id="country" name="country">
-                            <option value="none" selected disabled hidden>
-                                Select an Option
+                        <select id="proftype" name="proftype" onchange="onProfTypeChange(this)">
+                            <option value="none" selected disabled hidden style="color:red">
+                                Select an Option123
                             </option>
-                            <option value="australia">Doing service in State Government</option>
-                            <option value="canada">Doing service for Government of India</option>
-                            <option value="usa">I am working in private sector</option>
-                            <option value="usa">I am self employed</option>
-                            <option value="usa">Still studying</option>
-                        </select>
+                            <option value="centralgov">Doing service for Government of India</option>
+                            <option value="stategov">Doing service in State Government</option>
+                            <option value="private">I am working in private sector</option>
+                            <option value="selfemployed">I am self employed</option>
+                            <option value="student">Still studying</option>
+                        </select	>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="prof1row" style="displa:none">
                     <div class="col-25">
                         <label for="country">Profession</label>
                     </div>
@@ -169,7 +223,7 @@
                         <input type="text" id="lname" name="lastname" placeholder="Enter Your Profesion">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="prof2row" style="displa:none">
                     <div class="col-25">
                         <label for="country">Field of work</label>
                     </div>
@@ -189,7 +243,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="prof3row" style="displa:none">
                     <div class="col-25">
                         <label for="lname">Additional information about work (optional)</label>
                     </div>
@@ -197,15 +251,15 @@
                         <input type="text" id="lname" name="lastname" placeholder="...">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="study1row" style="displa:none">
                     <div class="col-25">
-                        <label for="lname">Study/Qualification</label>
+                        <label for="qual" id="quallabel">Study/Qualification</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Enter qualification">
+                        <input type="text" id="qual" name="qual" placeholder="Enter qualification">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="study2row" style="displa:none">
                     <div class="col-25">
                         <label for="lname">College/University</label>
                     </div>
