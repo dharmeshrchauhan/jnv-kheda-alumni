@@ -68,7 +68,7 @@
                         <label for="fname">Full Name</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="fname" name="firstname" placeholder="Your name.." autofocus >
+                        <input type="text" id="fname" name="firstname" placeholder="Your name.." autofocus value="aaaaa">
                     </div>
                 </div>
                 <div class="row">
@@ -76,8 +76,8 @@
                         <label for="lname">Admission Class/Year</label>
                     </div>
                     <div class="col-75">
-                        <select id="admclass" name="admclass" style="width:100px" onchange="onAdmissionClassChange()">
-                            <option value="-1" disabled selected>--</option>
+                        <select required id="admclass" name="admclass" style="width:100px" onchange="onAdmissionClassChange()">
+                            <option value="" disabled selected>--</option>
                             <option value="6">VI</option>
                             <option value="7">VII</option>
                             <option value="8">VIII</option>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="col-75">
                         <select id="proftype" name="proftype" onchange="onProfTypeChange(this)">
-                            <option value="none" selected disabled hidden>
+                            <option value="" selected disabled>
                                 Select an Option
                             </option>
                             <option value="centralgov">Doing service for Government of India</option>
@@ -212,7 +212,7 @@
                             <option value="private">I am working in private sector</option>
                             <option value="selfemployed">I am self employed</option>
                             <option value="student">Still studying</option>
-                        </select	>
+                        </select>
                     </div>
                 </div>
                 <div class="row" id="prof1row" style="display:none">
@@ -285,7 +285,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="submit" value="Submit">
+                    <input type="submit" onclick="document.getElementById('admclass').required = false;" value="Submit">
                 </div>
             </form>
         </div>

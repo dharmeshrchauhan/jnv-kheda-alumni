@@ -8,8 +8,13 @@ input[type=text],input[type=Email], select, textarea{
     resize: vertical;
   }
 
-  select { color: gray; }
-  
+  select:invalid { color: gray; }
+
+  select[selectedIndex="0"] { color: red; }
+  input[value="aaaa"] {
+    color: orange;
+  }
+
   /* Style the label to display next to the inputs */
   label {
     padding: 12px 12px 12px 0;
